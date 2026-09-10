@@ -60,4 +60,13 @@ with plots:
 
 with maps:
     st.subheader("Maps")
-    first_map = px.scatter_map(df,)
+    first_map = px.scatter_map(
+        df,
+        lat="Latitude",
+        lon="Longitude",
+        title="Vehicle Track on a Map",
+        center={"lat":25.9121,"lon":-80.1371},
+        zoom=16,
+        color="Temperature (c)",
+        color_continuous_scale="viridis")
+    st.plotly_chart(first_map)
