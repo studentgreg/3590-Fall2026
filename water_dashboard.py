@@ -20,7 +20,7 @@ uploaded_file=st.sidebar.file_uploader("Upload a CSV file",
 if uploaded_file is not None:
     df = pd.read_csv(uploaded_file)
 else:
-    df = pd.read_csv("2021-oct21.csv")
+    df = pd.read_csv("biscayneBay_waterquality.csv") # please use this csv file
 
 tables, plots, maps = st.tabs(["Data",
                                "Charts",
@@ -42,3 +42,22 @@ with plots:
                    y=parameter,
                    title=f"{parameter} over Time")
     st.plotly_chart(fig1)
+
+    fig2 = px.scatter(df,
+                      x="Temperature (c)",
+                      y="Salinity (ppt)",
+                      title="Temperature vs Salinity")
+    st.plotly_chart(fig2)
+
+    fig3 = px.scatter_3d(df,
+                         x="Longitude",
+                         y="Latitude",
+                         z="Total Water Column (m)",
+                         color="Temperature (c)",
+                         title="3D Visualization of the Bay Floor")
+    fig3.update_scenes(zaxis_autorange="reversed")
+    st.plotly_chart(fig3)
+
+with maps:
+    st.subheader("Maps")
+    first_map = px.scatter_map(df,)
